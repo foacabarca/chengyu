@@ -13,7 +13,9 @@ from openpyxl.styles import Alignment
 from openpyxl.styles import PatternFill
 
 wb = load_workbook("E:/PythonProject/nqueen.xlsx")  # 加载excel文件
-sheet = wb["Sheet1"]  # 获取表单
+ws = wb["Sheet1"]
+wb.remove(ws)  # 删除原有表单
+sheet = wb.create_sheet("Sheet1")  # 创建新表单
 n = 8  # 设置n皇后的皇后数目，可更改
 queenpos = [0 for i in range(n)]  # 用于存放n个皇后的位置，第i+1个皇后在第queenpos[i]+1列
 answer_num = 0  # n皇后解的个数
@@ -98,4 +100,4 @@ def nqueen(k):
 
 nqueen(0)
 print("答案个数为", answer_num)  # 控制台输出n皇后答案的个数
-wb.save("E:/PythonProject/nqueen.xlsx")
+wb.save("E:/PythonProject/nqueen.xlsx")  # 保存
