@@ -68,6 +68,7 @@ def nqueen(k):
     每输出一行就设置该行的字体，格式，颜色等等
     """
     global row_num, answer_num, queenpos, n
+    pos = [0 for l in range(n)]
     if k == n:
         for i in range(n):
             # 每生成一个位置，就新增一行，在特定位置输出皇后
@@ -81,6 +82,7 @@ def nqueen(k):
         fillcolor0()
         answer_num = answer_num + 1
         row_num = row_num + 1
+        print(queenpos)
         return
     for i in range(n):
         j = 0
@@ -92,8 +94,8 @@ def nqueen(k):
         if j == k:
             queenpos[k] = i
             nqueen(k + 1)
-    print(answer_num)  # 控制台输出n皇后答案的个数
 
 
 nqueen(0)
+print("答案个数为", answer_num)  # 控制台输出n皇后答案的个数
 wb.save("E:/PythonProject/nqueen.xlsx")
