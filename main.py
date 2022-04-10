@@ -16,7 +16,7 @@ wb = load_workbook("E:/PythonProject/nqueen.xlsx")  # 加载excel文件
 ws = wb["Sheet1"]
 wb.remove(ws)  # 删除原有表单
 sheet = wb.create_sheet("Sheet1")  # 创建新表单
-n = 8  # 设置n皇后的皇后数目，可更改
+n = 5  # 设置n皇后的皇后数目，可更改
 queenpos = [0 for i in range(n)]  # 用于存放n个皇后的位置，第i+1个皇后在第queenpos[i]+1列
 answer_num = 0  # n皇后解的个数
 row_num = 0  # 行数
