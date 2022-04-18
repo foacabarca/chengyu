@@ -7,11 +7,10 @@ Date:2022.4.18
 """
 
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
-from PyQt5.QtCore import QPointF, Qt
-from PyQt5.QtGui import QBrush, QPolygonF
-from PyQt5.QtWidgets import QMainWindow, QGraphicsScene, QGraphicsPolygonItem, QGraphicsItem, QApplication, \
-    QGraphicsRectItem
+from PyQt5 import uic
+from PyQt5.QtCore import QPointF, Qt, QRectF
+from PyQt5.QtGui import QBrush, QPolygonF, QImage, QPainter
+from PyQt5.QtWidgets import QMainWindow, QGraphicsScene, QGraphicsPolygonItem, QGraphicsItem, QApplication, QFileDialog
 
 
 class MainWindow(QMainWindow):
@@ -21,6 +20,7 @@ class MainWindow(QMainWindow):
         self.scene = QGraphicsScene(0, 0, 400, 400)
         self.graphicsView.setScene(self.scene)
         self.init_shapes()
+        self.pushButton.clicked.connect(self.save)
         self.pushButton_6.clicked.connect(self.onRotateLeft)
         self.pushButton_7.clicked.connect(self.onRotateRight)
         self.pushButton_8.clicked.connect(self.onMoveUp)
@@ -110,6 +110,14 @@ class MainWindow(QMainWindow):
         items = self.scene.selectedItems()
         for item in items:
             item.moveBy(10, 0)
+
+    def save(self):
+        rect = self.scene.sceneRect()
+        pixmap = QImage(rect.height(), rect.width(), QImage.Format_ARGB32_Premultiplied)
+        painter = QPainter(pixmap)
+        rectf = QRectF(0, 0, pixmap.rect().height(), pixmap.rect().width())
+        self.scene.render(painter, rectf, rect)
+        pixmap.save('D:\\file.png')
 
 
 if __name__ == "__main__":
